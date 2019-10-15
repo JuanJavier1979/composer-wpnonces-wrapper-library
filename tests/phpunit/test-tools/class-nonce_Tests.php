@@ -136,4 +136,27 @@ class Test_Nonce extends Base\TestCase {
 		$this->assertTrue( $test );
 	}
 
+	/**
+	 * Test check_ajax_referer method.
+	 */
+	public function check_ajax_referer() {
+		// Setup
+		\WP_Mock::userFunction( 'check_ajax_referer', array(
+			'times' => 1,
+			'args' => array(
+				'foo',
+				'bar',
+				'z'
+			),
+			'return' => true,
+		) );
+
+		// Act
+		$nonce = new Nonce();
+		$test  = $nonce->check_ajax_referer( 'foo', 'bar', 'z' );
+
+		// Verify
+		$this->assertTrue( $test );
+	}
+
 }
