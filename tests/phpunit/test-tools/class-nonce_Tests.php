@@ -23,4 +23,28 @@ class Test_Nonce extends Base\TestCase {
 		// Verify
 		$this->assertEquals( 'bar', $test );
 	}
+
+	/**
+	 * Test generate_url method.
+	 */
+	public function test_generate_url() {
+		// Setup
+		\WP_Mock::userFunction( 'wp_nonce_url', array(
+			'times' => 1,
+			'args' => array(
+				'foo',
+				'bar',
+				'z'
+			),
+			'return' => 'http://example.com/foo',
+		) );
+
+		// Act
+		$nonce = new Nonce();
+		$test  = $nonce->generate_url( 'foo', 'bar', 'z' );
+
+		// Verify
+		$this->assertEquals( 'http://example.com/foo', $test );
+	}
+
 }
