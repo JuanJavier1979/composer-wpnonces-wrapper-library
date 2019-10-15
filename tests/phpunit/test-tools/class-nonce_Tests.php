@@ -114,4 +114,26 @@ class Test_Nonce extends Base\TestCase {
 		$this->assertEquals( 'The link you followed has expired.', $test );
 	}
 
+	/**
+	 * Test check_admin_referer method.
+	 */
+	public function check_admin_referer() {
+		// Setup
+		\WP_Mock::userFunction( 'check_admin_referer', array(
+			'times' => 1,
+			'args' => array(
+				'foo',
+				'bar'
+			),
+			'return' => true,
+		) );
+
+		// Act
+		$nonce = new Nonce();
+		$test  = $nonce->check_admin_referer( 'foo', 'bar' );
+
+		// Verify
+		$this->assertTrue( $test );
+	}
+
 }
