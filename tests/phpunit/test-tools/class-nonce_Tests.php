@@ -47,4 +47,26 @@ class Test_Nonce extends Base\TestCase {
 		$this->assertEquals( 'http://example.com/foo', $test );
 	}
 
+	/**
+	 * Test verify method.
+	 */
+	public function test_verify() {
+		// Setup
+		\WP_Mock::userFunction( 'wp_verify_nonce', array(
+			'times' => 1,
+			'args' => array(
+				'foo',
+				'bar'
+			),
+			'return' => 1,
+		) );
+
+		// Act
+		$nonce = new Nonce();
+		$test  = $nonce->verify( 'foo', 'bar' );
+
+		// Verify
+		$this->assertEquals( 1, $test );
+	}
+
 }
