@@ -69,4 +69,28 @@ class Test_Nonce extends Base\TestCase {
 		$this->assertEquals( 1, $test );
 	}
 
+	/**
+	 * Test field method.
+	 */
+	public function test_field() {
+		// Setup
+		\WP_Mock::userFunction( 'wp_nonce_field', array(
+			'times' => 1,
+			'args' => array(
+				'foo',
+				'bar',
+				'referer',
+				'echo'
+			),
+			'return' => '<input type="hidden" id="bar" name="bar" value="foo" />',
+		) );
+
+		// Act
+		$nonce = new Nonce();
+		$test  = $nonce->field( 'foo', 'bar', 'referer', 'echo' );
+
+		// Verify
+		$this->assertEquals( '<input type="hidden" id="bar" name="bar" value="foo" />', $test );
+	}
+
 }
