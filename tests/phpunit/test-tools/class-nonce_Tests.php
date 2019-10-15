@@ -93,4 +93,25 @@ class Test_Nonce extends Base\TestCase {
 		$this->assertEquals( '<input type="hidden" id="bar" name="bar" value="foo" />', $test );
 	}
 
+	/**
+	 * Test display_ays method.
+	 */
+	public function test_display_ays() {
+		// Setup
+		\WP_Mock::userFunction( 'wp_nonce_ays', array(
+			'times' => 1,
+			'args' => array(
+				'foo'
+			),
+			'return' => 'The link you followed has expired.',
+		) );
+
+		// Act
+		$nonce = new Nonce();
+		$test  = $nonce->display_ays( 'foo' );
+
+		// Verify
+		$this->assertEquals( 'The link you followed has expired.', $test );
+	}
+
 }
