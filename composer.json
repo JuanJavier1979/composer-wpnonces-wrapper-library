@@ -1,0 +1,42 @@
+{
+  "name": "juanjavier1979/composer-wpnonces-wrapper-library",
+  "type": "library",
+  "description": "An OOP wrapper for all WordPress nonces functions",
+  "keywords": [
+    "WordPress",
+    "nonces",
+    "oop"
+  ],
+  "license": "GPL-2.0",
+  "authors": [
+    {
+      "name": "JuanJavier1979",
+      "email": "jjmrestituto@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "WpnoncesWrapperLibrary\\": "src/"
+    }
+  },
+  "autoload-dev": {
+	  "psr-4": {
+		  "WpnoncesWrapperLibrary\\": "tests"
+	  }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.2",
+    "10up/wp_mock": "dev-master",
+    "10up/phpcs-composer": "dev-master"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "test": "phpunit",
+    "cs-check": "phpcs src tests",
+    "cs-fix": "phpcbf src tests"
+  }
+}
